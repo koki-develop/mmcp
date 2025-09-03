@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "TODO",
+      "name": "mmcp",
       "dependencies": {
         "commander": "14.0.0",
       },
