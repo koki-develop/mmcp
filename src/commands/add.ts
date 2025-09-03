@@ -1,16 +1,15 @@
-import { defaultConfigPath, loadConfig, saveConfig } from "../lib/config";
+import { loadConfig, saveConfig } from "../lib/config";
 
 export type AddCommandParams = {
   name: string;
   command: string;
   args: string[];
+
+  configPath: string; // --config
 };
 
 export function addCommand(params: AddCommandParams) {
-  // TODO: from `--config` flag
-  const configPath = defaultConfigPath();
-
-  const config = loadConfig({ path: configPath });
+  const config = loadConfig({ path: params.configPath });
 
   if (config.mcpServers[params.name]) {
     throw new Error(`Server with name "${params.name}" already exists.`);
@@ -22,7 +21,7 @@ export function addCommand(params: AddCommandParams) {
   };
 
   saveConfig({
-    path: configPath,
+    path: params.configPath,
     config,
   });
 }
