@@ -41,6 +41,6 @@ export type SaveConfigParams = {
 };
 
 export function saveConfig(params: SaveConfigParams): void {
-  const content = JSON.stringify(params.config, null, 2) + "\n";
+  const content = `${JSON.stringify(params.config, null, 2)}\n`;
   fs.writeFileSync(params.path, content, "utf-8");
 }
