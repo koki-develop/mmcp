@@ -22,6 +22,7 @@
     "lint": "biome check .",
     "typecheck": "tsc --noEmit",
     "build": "bun run ./scripts/build.ts",
+    "test": "bun test",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
