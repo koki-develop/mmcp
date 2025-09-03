@@ -3,11 +3,6 @@ import packageJson from "../package.json" with { type: "json" };
 
 const program = new Command();
 
-program
-  .name("mmcp")
-  .version(packageJson.version)
-  .action(() => {
-    console.log("hello world");
-  });
+program.name("mmcp").version(packageJson.version);
 
 program.parse(process.argv);
