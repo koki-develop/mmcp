@@ -8,9 +8,10 @@ program.name("mmcp").version(packageJson.version);
 
 program
   .command("add")
-  .argument("<name>")
-  .argument("<command>")
-  .argument("[args...]")
+  .description("Add a mcp server")
+  .argument("<name>", "Name of the server")
+  .argument("<command>", "Command to start the server")
+  .argument("[args...]", "Arguments for the command")
   .action((name: string, command: string, args: string[]) => {
     addCommand({ name, command, args });
   });
