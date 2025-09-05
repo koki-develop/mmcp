@@ -1,7 +1,9 @@
-import { Command } from "commander";
+import { Command, Option } from "commander";
 import packageJson from "../package.json" with { type: "json" };
 import { addCommand } from "./commands/add";
+import { applyCommand } from "./commands/apply";
 import { removeCommand } from "./commands/remove";
+import { supportedAgentIds } from "./lib/agents/registry";
 import { defaultConfigPath } from "./lib/config";
 
 const program = new Command();
@@ -46,6 +48,19 @@ program
       name,
       configPath: options.config,
     });
+  });
+
+program
+  .command("apply")
+  .description("Apply mmcp config to an agent")
+  .addOption(
+    new Option("--agents <name...>", "Target agents")
+      .choices(supportedAgentIds())
+      .makeOptionMandatory(true),
+  )
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .action((options: { agents: string[]; config: string }) => {
+    applyCommand({ agents: options.agents, configPath: options.config });
   });
 
 program.parse(process.argv);
