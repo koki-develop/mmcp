@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import packageJson from "../package.json" with { type: "json" };
 import { addCommand } from "./commands/add";
+import { removeCommand } from "./commands/remove";
 import { defaultConfigPath } from "./lib/config";
 
 const program = new Command();
@@ -34,5 +35,17 @@ program
       });
     },
   );
+
+program
+  .command("remove")
+  .description("Remove a mcp server")
+  .argument("<name>", "Name of the server")
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .action((name: string, options: { config: string }) => {
+    removeCommand({
+      name,
+      configPath: options.config,
+    });
+  });
 
 program.parse(process.argv);
