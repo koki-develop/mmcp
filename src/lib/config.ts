@@ -12,8 +12,8 @@ export const mcpServerSchema = z.object({
 export type MCPServer = z.infer<typeof mcpServerSchema>;
 
 export const configSchema = z.object({
-  mcpServers: z.record(z.string().min(1), mcpServerSchema).default({}),
   agents: z.array(z.string().min(1)).default([]),
+  mcpServers: z.record(z.string().min(1), mcpServerSchema).default({}),
 });
 
 export type Config = z.infer<typeof configSchema>;
