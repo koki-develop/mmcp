@@ -1,3 +1,4 @@
+import ora from "ora";
 import { loadConfig, saveConfig } from "../lib/config";
 
 export type AddCommandParams = {
@@ -22,9 +23,9 @@ export function addCommand(params: AddCommandParams) {
     args: params.args,
     env: params.env,
   };
-
   saveConfig({
     path: params.configPath,
     config,
   });
+  ora().succeed(`Added server: ${params.name}`);
 }

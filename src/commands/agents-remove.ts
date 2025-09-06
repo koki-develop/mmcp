@@ -1,3 +1,4 @@
+import ora from "ora";
 import { supportedAgentIds } from "../lib/agents/registry";
 import { loadConfig, saveConfig } from "../lib/config";
 
@@ -28,4 +29,5 @@ export function agentsRemoveCommand(params: AgentsRemoveCommandParams) {
     path: params.configPath,
     config,
   });
+  ora().succeed(`Removed agents: ${params.names.join(", ")}`);
 }

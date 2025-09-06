@@ -1,3 +1,4 @@
+import ora from "ora";
 import { loadConfig, saveConfig } from "../lib/config";
 
 export type RemoveCommandParams = {
@@ -13,9 +14,9 @@ export function removeCommand(params: RemoveCommandParams) {
   }
 
   delete config.mcpServers[params.name];
-
   saveConfig({
     path: params.configPath,
     config,
   });
+  ora().succeed(`Removed server: "${params.name}"`);
 }

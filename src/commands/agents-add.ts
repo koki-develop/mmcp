@@ -1,3 +1,4 @@
+import ora from "ora";
 import { supportedAgentIds } from "../lib/agents/registry";
 import { loadConfig, saveConfig } from "../lib/config";
 
@@ -35,4 +36,5 @@ export function agentsAddCommand(params: AgentsAddCommandParams) {
     path: params.configPath,
     config,
   });
+  ora().succeed(`Added agents: ${toAppend.join(", ")}`);
 }
