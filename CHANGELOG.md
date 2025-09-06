@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.0](https://github.com/koki-develop/mmcp/compare/v0.0.4...v0.1.0) (2025-09-06)
+
+
+### Features
+
+* Support codex-cli ([8d369d9](https://github.com/koki-develop/mmcp/commit/8d369d9c5139c298ec098eb95cc7bedc2968ec1c))
+
+
+### Bug Fixes
+
+* Fix ([50a644a](https://github.com/koki-develop/mmcp/commit/50a644a3a8e44207e4258b9765535a7f2ec0f0ac))
+
 ## [0.0.4](https://github.com/koki-develop/mmcp/compare/v0.0.3...v0.0.4) (2025-09-06)
 
 
