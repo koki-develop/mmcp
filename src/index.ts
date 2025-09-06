@@ -1,6 +1,8 @@
-import { Command, Option } from "commander";
+import { Argument, Command, Option } from "commander";
 import packageJson from "../package.json" with { type: "json" };
 import { addCommand } from "./commands/add";
+import { agentsAddCommand } from "./commands/agents-add";
+import { agentsRemoveCommand } from "./commands/agents-remove";
 import { applyCommand } from "./commands/apply";
 import { removeCommand } from "./commands/remove";
 import { supportedAgentIds } from "./lib/agents/registry";
@@ -54,13 +56,40 @@ program
   .command("apply")
   .description("Apply mmcp config to an agent")
   .addOption(
-    new Option("--agents <name...>", "Target agents")
-      .choices(supportedAgentIds())
-      .makeOptionMandatory(true),
+    new Option("--agents <name...>", "Target agents").choices(
+      supportedAgentIds(),
+    ),
   )
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
-  .action((options: { agents: string[]; config: string }) => {
-    applyCommand({ agents: options.agents, configPath: options.config });
+  .action((options: { agents?: string[]; config: string }) => {
+    applyCommand({ agents: options.agents ?? [], configPath: options.config });
+  });
+
+// agents subcommands
+const agents = program
+  .command("agents")
+  .description("Manage apply target agents");
+
+agents
+  .command("add")
+  .description("Add apply target agents")
+  .addArgument(
+    new Argument("<name...>", "Agent names").choices(supportedAgentIds()),
+  )
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .action((names: string[], options: { config: string }) => {
+    agentsAddCommand({ names, configPath: options.config });
+  });
+
+agents
+  .command("remove")
+  .description("Remove apply target agents")
+  .addArgument(
+    new Argument("<name...>", "Agent names").choices(supportedAgentIds()),
+  )
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .action((names: string[], options: { config: string }) => {
+    agentsRemoveCommand({ names, configPath: options.config });
   });
 
 program.parse(process.argv);

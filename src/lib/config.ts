@@ -11,7 +11,8 @@ export const mcpServerSchema = z.object({
 export type MCPServer = z.infer<typeof mcpServerSchema>;
 
 export const configSchema = z.object({
-  mcpServers: z.record(z.string().min(1), mcpServerSchema),
+  mcpServers: z.record(z.string().min(1), mcpServerSchema).default({}),
+  agents: z.array(z.string().min(1)).default([]),
 });
 
 export type Config = z.infer<typeof configSchema>;
@@ -27,7 +28,7 @@ export function defaultConfigPath(): string {
 
 export function loadConfig(params: LoadConfigParams): Config {
   if (!fs.existsSync(params.path)) {
-    return { mcpServers: {} };
+    return { mcpServers: {}, agents: [] };
   }
 
   const content = fs.readFileSync(params.path, "utf-8");
