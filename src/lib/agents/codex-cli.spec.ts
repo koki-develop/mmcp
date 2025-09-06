@@ -96,7 +96,7 @@ describe("mergeConfig", () => {
     ],
   ];
 
-  test.each(cases)("%s", (title, input, config, expected) => {
+  test.each(cases)("%s", (_title, input, config, expected) => {
     const out = mergeConfig(input, config);
     expect(out).toEqual(expected);
   });
