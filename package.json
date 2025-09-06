@@ -26,6 +26,7 @@
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
+    "@shopify/toml-patch": "0.3.0",
     "commander": "14.0.0",
     "ora": "8.2.0",
     "zod": "4.1.5"
