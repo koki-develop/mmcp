@@ -1,9 +1,9 @@
 import type { AgentAdapter } from "./adapter";
 import { ClaudeCodeAgent } from "./claude-code";
 
-const agents: AgentAdapter<unknown>[] = [new ClaudeCodeAgent()];
+const agents: AgentAdapter[] = [new ClaudeCodeAgent()];
 
-export function getAgentById(id: string): AgentAdapter<unknown> | undefined {
+export function getAgentById(id: string): AgentAdapter | undefined {
   return agents.find((a) => a.id === id);
 }
 

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import type { Config, MCPServer } from "../config";
+import type { Config } from "../config";
 import type { AgentAdapter } from "./adapter";
 
 type ClaudeCodeConfig = {
@@ -11,10 +11,32 @@ type ClaudeCodeConfig = {
   [key: string]: unknown;
 };
 
-export class ClaudeCodeAgent implements AgentAdapter<ClaudeCodeConfig> {
+export class ClaudeCodeAgent implements AgentAdapter {
   readonly id = "claude-code" as const;
 
-  loadConfig(): ClaudeCodeConfig {
+  applyConfig(config: Config): void {
+    const agentConfig = this._loadConfig();
+    if (!agentConfig.mcpServers) {
+      agentConfig.mcpServers = {};
+    }
+
+    for (const [name, server] of Object.entries(config.mcpServers)) {
+      agentConfig.mcpServers[name] = {
+        command: server.command,
+        args: server.args,
+        env: server.env,
+      };
+    }
+
+    this._saveConfig(agentConfig);
+  }
+
+  private _configPath(): string {
+    const home = os.homedir();
+    return path.join(home, ".claude.json");
+  }
+
+  private _loadConfig(): ClaudeCodeConfig {
     const pathname = this._configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
@@ -23,44 +45,9 @@ export class ClaudeCodeAgent implements AgentAdapter<ClaudeCodeConfig> {
     return JSON.parse(content);
   }
 
-  saveConfig(config: ClaudeCodeConfig): void {
+  private _saveConfig(config: ClaudeCodeConfig): void {
     const pathname = this._configPath();
     const content = `${JSON.stringify(config, null, 2)}\n`;
     fs.writeFileSync(pathname, content, "utf-8");
-  }
-
-  mergeWithMmcp(params: {
-    mmcpConfig: Config;
-    agentConfig: ClaudeCodeConfig;
-  }): ClaudeCodeConfig {
-    const next: ClaudeCodeConfig = {
-      ...params.agentConfig,
-    };
-    if (!next.mcpServers) {
-      next.mcpServers = {};
-    }
-
-    for (const [name, server] of Object.entries(params.mmcpConfig.mcpServers)) {
-      next.mcpServers[name] = this._toClaudeServer(server);
-    }
-
-    return next;
-  }
-
-  private _configPath(): string {
-    const home = os.homedir();
-    return path.join(home, ".claude.json");
-  }
-
-  private _toClaudeServer(server: MCPServer): {
-    command: string;
-    args: string[];
-    env: Record<string, string>;
-  } {
-    return {
-      command: server.command,
-      args: server.args,
-      env: server.env,
-    };
   }
 }

@@ -8,12 +8,12 @@ export type ApplyCommandParams = {
 };
 
 export function applyCommand(params: ApplyCommandParams) {
-  const mmcpConfig = loadConfig({ path: params.configPath });
+  const config = loadConfig({ path: params.configPath });
 
   // Determine target agents
   const agentIds = (() => {
     if (params.agents.length > 0) return params.agents;
-    return mmcpConfig.agents;
+    return config.agents;
   })();
   if (agentIds.length === 0) {
     throw new Error(
@@ -38,9 +38,7 @@ export function applyCommand(params: ApplyCommandParams) {
 
   for (const adapter of adapters) {
     const spinner = ora().start(`Applying config: ${adapter.id}...`);
-    const agentConfig = adapter.loadConfig();
-    const merged = adapter.mergeWithMmcp({ agentConfig, mmcpConfig });
-    adapter.saveConfig(merged);
+    adapter.applyConfig(config);
     spinner.succeed(`Applied config: ${adapter.id}`);
   }
 }
