@@ -36,6 +36,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     if: ${{ needs.release-please.outputs.should-release == 'true' }}
     steps:
