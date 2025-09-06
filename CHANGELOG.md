@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/koki-develop/mmcp/compare/v0.0.1...v0.0.2) (2025-09-06)
+
+
+### Bug Fixes
+
+* Fix release-please workflow ([98b3f2e](https://github.com/koki-develop/mmcp/commit/98b3f2e044e77c2f90024cbef3e06a136495346d))
+
 ## 0.0.1 (2025-09-06)
 
 
