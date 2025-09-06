@@ -9,11 +9,6 @@ export class CodexCliAgent implements AgentAdapter {
   readonly id = "codex-cli" as const;
 
   applyConfig(config: Config): void {
-    const servers = Object.entries(config.mcpServers);
-    if (servers.length === 0) {
-      return;
-    }
-
     const content = this._loadConfig();
     const next = mergeConfig(content, config);
     if (next === content) {
@@ -51,6 +46,11 @@ export class CodexCliAgent implements AgentAdapter {
 }
 
 export function mergeConfig(content: string, config: Config): string {
+  const servers = Object.entries(config.mcpServers);
+  if (servers.length === 0) {
+    return content;
+  }
+
   const patches: [
     string[],
     number | string | boolean | undefined | (number | string | boolean)[],
