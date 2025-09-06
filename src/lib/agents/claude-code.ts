@@ -4,7 +4,7 @@ import path from "node:path";
 import type { Config } from "../config";
 import type { AgentAdapter } from "./adapter";
 
-type ClaudeCodeConfig = {
+export type ClaudeCodeConfig = {
   mcpServers?: {
     [name: string]: unknown;
   };
