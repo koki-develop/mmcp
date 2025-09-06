@@ -17,7 +17,7 @@ program
   .argument("<command>", "Command to start the server")
   .argument("[args...]", "Arguments for the command")
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
-  .option("--overwrite", "Overwrite if the server already exists", false)
+  .option("--force", "Overwrite if the server already exists", false)
   .action(
     (
       name: string,
@@ -25,7 +25,7 @@ program
       args: string[],
       options: {
         config: string;
-        overwrite: boolean;
+        force: boolean;
       },
     ) => {
       addCommand({
@@ -33,7 +33,7 @@ program
         command,
         args,
         configPath: options.config,
-        overwrite: options.overwrite,
+        force: options.force,
       });
     },
   );
