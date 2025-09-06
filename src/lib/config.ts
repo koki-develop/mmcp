@@ -29,6 +29,9 @@ export function defaultConfigPath(): string {
 
 export function loadConfig(params: LoadConfigParams): Config {
   if (!fs.existsSync(params.path)) {
+    if (params.path !== defaultConfigPath()) {
+      throw new Error(`Config file not found: ${params.path}`);
+    }
     return { mcpServers: {}, agents: [] };
   }
 
