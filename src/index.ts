@@ -105,4 +105,11 @@ agents
     agentsRemoveCommand({ names, configPath: options.config });
   });
 
-program.parse(process.argv);
+program.parseAsync(process.argv).catch((err) => {
+  if (process.env.DEBUG === "true") {
+    console.error(err);
+  } else {
+    console.error(String(err));
+  }
+  process.exit(1);
+});
