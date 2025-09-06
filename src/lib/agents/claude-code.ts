@@ -55,7 +55,12 @@ export class ClaudeCodeAgent implements AgentAdapter<ClaudeCodeConfig> {
   private _toClaudeServer(server: MCPServer): {
     command: string;
     args: string[];
+    env: Record<string, string>;
   } {
-    return { command: server.command, args: server.args };
+    return {
+      command: server.command,
+      args: server.args,
+      env: server.env,
+    };
   }
 }

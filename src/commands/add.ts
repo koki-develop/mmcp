@@ -4,6 +4,7 @@ export type AddCommandParams = {
   name: string;
   command: string;
   args: string[];
+  env: Record<string, string>;
 
   configPath: string; // --config
   force: boolean; // --force
@@ -19,6 +20,7 @@ export function addCommand(params: AddCommandParams) {
   config.mcpServers[params.name] = {
     command: params.command,
     args: params.args,
+    env: params.env,
   };
 
   saveConfig({

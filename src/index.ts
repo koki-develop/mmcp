@@ -18,6 +18,7 @@ program
   .argument("<name>", "Name of the server")
   .argument("<command>", "Command to start the server")
   .argument("[args...]", "Arguments for the command")
+  .option("-e, --env <key=value...>", "Environment variables for the server")
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .option("-f, --force", "Overwrite if the server already exists", false)
   .action(
@@ -28,12 +29,24 @@ program
       options: {
         config: string;
         force: boolean;
+        env?: string[];
       },
     ) => {
+      const env: Record<string, string> = {};
+      for (const item of options.env ?? []) {
+        const [key, value, ...rest] = item.split("=");
+        if (!key || !value || rest.length > 0) {
+          throw new Error(
+            `Invalid --env value: ${JSON.stringify(item)}. Use KEY=VALUE format.`,
+          );
+        }
+        env[key] = value;
+      }
       addCommand({
         name,
         command,
         args,
+        env,
         configPath: options.config,
         force: options.force,
       });
