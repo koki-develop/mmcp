@@ -65,7 +65,8 @@ Example:
 
 ## Supported Agents
 
-- `claude-code` (writes MCP servers into `~/.claude.json`)
+- `claude-code`: writes MCP servers into `~/.claude.json`
+- `codex-cli`: writes MCP servers into `~/.codex/config.toml`
 
 More agents may be added in the future.
 
