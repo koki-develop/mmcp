@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.4](https://github.com/koki-develop/mmcp/compare/v0.0.3...v0.0.4) (2025-09-06)
+
+
+### Bug Fixes
+
+* Add proper error handling for CLI parsing ([808f6fa](https://github.com/koki-develop/mmcp/commit/808f6fa2e36ac2af3acb36ecc5d92cbb6f42a5ea))
+* Fix field order ([e789af2](https://github.com/koki-develop/mmcp/commit/e789af2109a7e1ae0dfd61807e1904060efedd8a))
+* Simplify AgentAdapter interface ([b8e485c](https://github.com/koki-develop/mmcp/commit/b8e485ca8932a7ddda4fa37de0e221c086f1c501))
+
 ## [0.0.3](https://github.com/koki-develop/mmcp/compare/v0.0.2...v0.0.3) (2025-09-06)
 
 
