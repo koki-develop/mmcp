@@ -16,7 +16,12 @@ export class ClaudeCodeAgent implements AgentAdapter {
 
   applyConfig(config: Config): void {
     const agentConfig = this._loadConfig();
+
     const next = mergeConfig(agentConfig, config);
+    if (JSON.stringify(next) === JSON.stringify(agentConfig)) {
+      return;
+    }
+
     this._saveConfig(next);
   }
 
@@ -55,7 +60,9 @@ export function mergeConfig(
   }
 
   for (const [name, server] of Object.entries(config.mcpServers)) {
+    const existing = agentConfig.mcpServers[name] ?? {};
     agentConfig.mcpServers[name] = {
+      ...existing,
       command: server.command,
       args: server.args,
       env: server.env,

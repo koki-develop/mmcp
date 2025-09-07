@@ -1,14 +1,14 @@
 import { describe, expect, test } from "bun:test";
 import type { Config } from "../config";
-import type { ClaudeDesktopConfig } from "./claude-desktop";
-import { mergeConfig } from "./claude-desktop";
+import type { GeminiSettings } from "./gemini-cli";
+import { mergeConfig } from "./gemini-cli";
 
-describe("mergeConfig (claude-desktop)", () => {
+describe("mergeConfig (gemini-cli)", () => {
   type Case = [
     title: string,
-    agentConfig: ClaudeDesktopConfig,
+    agentConfig: GeminiSettings,
     mmcp: Config,
-    expected: ClaudeDesktopConfig,
+    expected: GeminiSettings,
   ];
 
   const cases: Case[] = [
@@ -16,7 +16,7 @@ describe("mergeConfig (claude-desktop)", () => {
       "inserts new server into empty agent config",
       {},
       {
-        agents: ["claude-desktop"],
+        agents: ["gemini-cli"],
         mcpServers: {
           context7: {
             command: "npx",
@@ -61,18 +61,30 @@ describe("mergeConfig (claude-desktop)", () => {
       "overwrites existing server and keeps unknown keys under that server",
       {
         mcpServers: {
-          context7: { command: "old", args: ["-x"], env: {}, other: "stay" },
+          context7: {
+            command: "old",
+            args: ["-x"],
+            env: {},
+            trust: "all",
+            headers: { X: "1" },
+          },
         },
       },
       {
         agents: [],
         mcpServers: {
-          context7: { command: "npx", args: ["-y"], env: {} },
+          context7: { command: "npx", args: ["-y"], env: { K: "V" } },
         },
       },
       {
         mcpServers: {
-          context7: { command: "npx", args: ["-y"], env: {}, other: "stay" },
+          context7: {
+            command: "npx",
+            args: ["-y"],
+            env: { K: "V" },
+            trust: "all",
+            headers: { X: "1" },
+          },
         },
       },
     ],
@@ -83,11 +95,13 @@ describe("mergeConfig (claude-desktop)", () => {
         agents: [],
         mcpServers: {
           "name.with dot": { command: "npx", args: [], env: { K: "V" } },
+          "with space": { command: "node", args: ["a.js"], env: {} },
         },
       },
       {
         mcpServers: {
           "name.with dot": { command: "npx", args: [], env: { K: "V" } },
+          "with space": { command: "node", args: ["a.js"], env: {} },
         },
       },
     ],
