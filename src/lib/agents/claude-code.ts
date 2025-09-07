@@ -16,7 +16,12 @@ export class ClaudeCodeAgent implements AgentAdapter {
 
   applyConfig(config: Config): void {
     const agentConfig = this._loadConfig();
+
     const next = mergeConfig(agentConfig, config);
+    if (JSON.stringify(next) === JSON.stringify(agentConfig)) {
+      return;
+    }
+
     this._saveConfig(next);
   }
 

@@ -72,7 +72,7 @@ export function mergeConfig(
       command: server.command,
       args: server.args,
       env: server.env,
-    } as Record<string, unknown>;
+    };
   }
 
   return agentConfig;
