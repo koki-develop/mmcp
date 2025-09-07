@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/koki-develop/mmcp/compare/v0.2.0...v0.2.1) (2025-09-07)
+
+
+### Bug Fixes
+
+* Set description ([47c7641](https://github.com/koki-develop/mmcp/commit/47c764136f9f98c0a2103aac518e31cbe769b045))
+
 ## [0.2.0](https://github.com/koki-develop/mmcp/compare/v0.1.0...v0.2.0) (2025-09-07)
 
 
