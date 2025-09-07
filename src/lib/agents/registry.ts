@@ -1,8 +1,13 @@
 import type { AgentAdapter } from "./adapter";
 import { ClaudeCodeAgent } from "./claude-code";
+import { ClaudeDesktopAgent } from "./claude-desktop";
 import { CodexCliAgent } from "./codex-cli";
 
-const agents: AgentAdapter[] = [new ClaudeCodeAgent(), new CodexCliAgent()];
+const agents: AgentAdapter[] = [
+  new ClaudeCodeAgent(),
+  new CodexCliAgent(),
+  new ClaudeDesktopAgent(),
+];
 
 export function getAgentById(id: string): AgentAdapter | undefined {
   return agents.find((a) => a.id === id);
