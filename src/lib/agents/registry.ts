@@ -5,8 +5,8 @@ import { CodexCliAgent } from "./codex-cli";
 
 const agents: AgentAdapter[] = [
   new ClaudeCodeAgent(),
-  new CodexCliAgent(),
   new ClaudeDesktopAgent(),
+  new CodexCliAgent(),
 ];
 
 export function getAgentById(id: string): AgentAdapter | undefined {
