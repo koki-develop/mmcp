@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/koki-develop/mmcp/compare/v0.1.0...v0.2.0) (2025-09-07)
+
+
+### Features
+
+* Add list command to display configured MCP servers ([#6](https://github.com/koki-develop/mmcp/issues/6)) ([42b30b9](https://github.com/koki-develop/mmcp/commit/42b30b9d3aa10c1150b1164b603cb01e6c8bae31))
+* Implement agents list command ([#8](https://github.com/koki-develop/mmcp/issues/8)) ([e19169b](https://github.com/koki-develop/mmcp/commit/e19169bfca27f5a55f532fa181720daa141c55ea))
+
 ## [0.1.0](https://github.com/koki-develop/mmcp/compare/v0.0.4...v0.1.0) (2025-09-06)
 
 
