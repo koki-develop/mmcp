@@ -17,7 +17,20 @@ export function listCommand(params: ListCommandParams) {
     a.localeCompare(b),
   );
   for (const [name, server] of entries) {
-    const cmdline = [server.command, ...server.args].join(" ");
-    console.log(`${name}: ${cmdline}`);
+    const cmdline: string[] = [];
+    if (server.command != null) {
+      cmdline.push(server.command);
+      if (server.args != null) {
+        cmdline.push(...server.args);
+      }
+    } else if (server.url != null) {
+      cmdline.push(server.url);
+    }
+
+    if (cmdline.length === 0) {
+      console.log(name);
+    } else {
+      console.log(`${name}: ${cmdline.join(" ")}`);
+    }
   }
 }

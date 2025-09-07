@@ -64,9 +64,7 @@ export function mergeConfig(
     const existing = agentConfig.mcpServers[name] ?? {};
     agentConfig.mcpServers[name] = {
       ...existing,
-      command: server.command,
-      args: server.args,
-      env: server.env,
+      ...server,
     };
   }
 

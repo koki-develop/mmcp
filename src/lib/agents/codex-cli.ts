@@ -47,17 +47,59 @@ export function mergeConfig(content: string, config: Config): string {
     return content;
   }
 
-  const patches: [
-    string[],
-    number | string | boolean | undefined | (number | string | boolean)[],
-  ][] = [];
-  for (const [name, server] of Object.entries(config.mcpServers)) {
-    patches.push([["mcp_servers", name, "command"], server.command]);
-    patches.push([["mcp_servers", name, "args"], server.args]);
-    for (const [k, v] of Object.entries(server.env)) {
-      patches.push([["mcp_servers", name, "env", k], v]);
+  const patches = buildPatches(config);
+  return updateTomlValues(content, patches);
+}
+
+type PatchValue =
+  | number
+  | string
+  | boolean
+  | undefined
+  | (number | string | boolean)[];
+
+type Patch = [string[], PatchValue];
+
+export function buildPatches(config: Config): Patch[] {
+  const patches: Patch[] = [];
+
+  const isPrimitive = (v: unknown): v is number | string | boolean =>
+    typeof v === "string" || typeof v === "number" || typeof v === "boolean";
+
+  const isPrimitiveArray = (v: unknown): v is (number | string | boolean)[] =>
+    Array.isArray(v) && v.every((e) => isPrimitive(e));
+
+  const walk = (base: string[], value: unknown): void => {
+    if (value === undefined) {
+      // explicit undefined -> clear key
+      patches.push([base, undefined]);
+      return;
     }
+
+    if (isPrimitive(value) || isPrimitiveArray(value)) {
+      patches.push([base, value as PatchValue]);
+      return;
+    }
+
+    if (Array.isArray(value)) {
+      // Array of non-primitives: try to set by index recursively.
+      for (let i = 0; i < value.length; i++) {
+        walk([...base, String(i)], value[i]);
+      }
+      return;
+    }
+
+    if (value && typeof value === "object") {
+      for (const [k, v] of Object.entries(value)) {
+        walk([...base, k], v);
+      }
+    }
+  };
+
+  for (const [name, server] of Object.entries(config.mcpServers)) {
+    // Server entry may contain arbitrary nested keys; walk them all.
+    walk(["mcp_servers", name], server as unknown);
   }
 
-  return updateTomlValues(content, patches);
+  return patches;
 }
