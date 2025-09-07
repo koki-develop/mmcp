@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/koki-develop/mmcp/compare/v0.3.0...v0.3.1) (2025-09-07)
+
+
+### Bug Fixes
+
+* support flexible MCP server configurations ([#16](https://github.com/koki-develop/mmcp/issues/16)) ([074fbc2](https://github.com/koki-develop/mmcp/commit/074fbc232400b5fbc940fc4a016712e8127e0e94))
+
 ## [0.3.0](https://github.com/koki-develop/mmcp/compare/v0.2.1...v0.3.0) (2025-09-07)
 
 
