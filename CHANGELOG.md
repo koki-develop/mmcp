@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0](https://github.com/koki-develop/mmcp/compare/v0.2.1...v0.3.0) (2025-09-07)
+
+
+### Features
+
+* **agents:** add Claude Desktop adapter ([#10](https://github.com/koki-develop/mmcp/issues/10)) ([fb8368f](https://github.com/koki-develop/mmcp/commit/fb8368f558d7e248fae0345eef9409ec114692fd))
+* **agents:** add gemini-cli adapter ([#14](https://github.com/koki-develop/mmcp/issues/14)) ([ebe24b5](https://github.com/koki-develop/mmcp/commit/ebe24b519e564e756fc7039f53bdb5c9488a3a1d))
+* **cursor:** add Cursor agent adapter ([#15](https://github.com/koki-develop/mmcp/issues/15)) ([337e927](https://github.com/koki-develop/mmcp/commit/337e92747ea80a099dd9a69f0dbdc8e9895cbd3e))
+
+
+### Bug Fixes
+
+* avoid mutating input parameters in mergeConfig functions ([b5bf460](https://github.com/koki-develop/mmcp/commit/b5bf4606f02cd3d99126ece27c95a568ca3884a5))
+
 ## [0.2.1](https://github.com/koki-develop/mmcp/compare/v0.2.0...v0.2.1) (2025-09-07)
 
 
