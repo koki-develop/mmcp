@@ -40,4 +40,4 @@ CI (GitHub Actions) runs lint, build, typecheck, and tests on PRs and `main`.
 
 ## Security & Configuration Tips
 - `mmcp` writes user config to `~/.mmcp.json`. Do not commit secrets. Pass sensitive values via `--env KEY=VALUE` when adding servers.
-- Supported agents: `claude-code`, `codex-cli`. To add an agent, implement an adapter in `src/lib/agents/` and register it in `registry.ts`.
+- Supported agents: `claude-code`, `claude-desktop`, `codex-cli`. To add an agent, implement an adapter in `src/lib/agents/` and register it in `registry.ts`.
