@@ -9,8 +9,8 @@ const agents: AgentAdapter[] = [
   new ClaudeCodeAgent(),
   new ClaudeDesktopAgent(),
   new CodexCliAgent(),
-  new GeminiCliAgent(),
   new CursorAgent(),
+  new GeminiCliAgent(),
 ];
 
 export function getAgentById(id: string): AgentAdapter | undefined {
