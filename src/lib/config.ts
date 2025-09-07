@@ -3,11 +3,14 @@ import os from "node:os";
 import path from "node:path";
 import { z } from "zod";
 
-export const mcpServerSchema = z.object({
-  command: z.string().min(1),
-  args: z.array(z.string().min(1)),
-  env: z.record(z.string().min(1), z.string()).default({}),
-});
+export const mcpServerSchema = z
+  .looseObject({
+    url: z.url(),
+    command: z.string().min(1),
+    args: z.array(z.string().min(1)),
+    env: z.record(z.string().min(1), z.string()),
+  })
+  .partial();
 
 export type MCPServer = z.infer<typeof mcpServerSchema>;
 
