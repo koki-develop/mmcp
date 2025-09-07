@@ -21,19 +21,37 @@ $ mmcp add [--env KEY=VALUE ...] [--config <path>] [--force] -- <name> <command>
 
 # e.g.
 $ mmcp add -- context7 npx -y @upstash/context7-mcp@latest
+$ mmcp add -- everything npx -y @modelcontextprotocol/server-everything@latest
 ```
 
 Adds the MCP server definition into `~/.mmcp.json`.
+
+You can check configured servers anytime:
+
+```console
+$ mmcp list [--config <path>]
+context7: npx -y @upstash/context7-mcp@latest
+everything: npx -y @modelcontextprotocol/server-everything@latest
+```
 
 ### 2. Choose target agents
 
 Set which agents to apply to (e.g. `claude-code`).
 
 ```bash
-$ mmcp agents add|remove [--config <path>] <name...>
+$ mmcp agents add [--config <path>] <name...>
 
 # e.g.
 $ mmcp agents add claude-code
+$ mmcp agents add codex-cli
+```
+
+List registered agents:
+
+```console
+$ mmcp agents list [--config <path>]
+claude-code
+codex-cli
 ```
 
 ### 3. Apply your mmcp config to the agents
@@ -44,21 +62,6 @@ $ mmcp apply
 
 That’s it. Your MCP servers from `~/.mmcp.json` will be written into the agent’s config (e.g. `~/.claude.json` for Claude Code).
 
-### List configured servers
-
-```console
-$ mmcp list [--config <path>]
-context7: npx -y @upstash/context7-mcp@latest
-
-$ mmcp list --json
-{
-  "context7": {
-    "command": "npx",
-    "args": ["-y", "@upstash/context7-mcp@latest"],
-    "env": {}
-  }
-}
-```
 
 ## Configuration
 
@@ -68,11 +71,25 @@ Example:
 
 ```json
 {
-  "agents": ["claude-code"],
+  "agents": [
+    "claude-code",
+    "codex-cli"
+  ],
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "env": {}
+    },
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything@latest"
+      ],
       "env": {}
     }
   }
