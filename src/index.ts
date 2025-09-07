@@ -4,6 +4,7 @@ import { addCommand } from "./commands/add";
 import { agentsAddCommand } from "./commands/agents-add";
 import { agentsRemoveCommand } from "./commands/agents-remove";
 import { applyCommand } from "./commands/apply";
+import { listCommand } from "./commands/list";
 import { removeCommand } from "./commands/remove";
 import { supportedAgentIds } from "./lib/agents/registry";
 import { defaultConfigPath } from "./lib/config";
@@ -76,6 +77,15 @@ program
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .action((options: { agents?: string[]; config: string }) => {
     applyCommand({ agents: options.agents ?? [], configPath: options.config });
+  });
+
+program
+  .command("list")
+  .description("List configured mcp servers")
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .option("--json", "Output mcpServers as JSON", false)
+  .action((options: { config: string; json: boolean }) => {
+    listCommand({ configPath: options.config, json: options.json });
   });
 
 // agents subcommands

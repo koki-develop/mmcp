@@ -38,11 +38,27 @@ $ mmcp agents add claude-code
 
 ### 3. Apply your mmcp config to the agents
 
-```bash
+```console
 $ mmcp apply
 ```
 
 That’s it. Your MCP servers from `~/.mmcp.json` will be written into the agent’s config (e.g. `~/.claude.json` for Claude Code).
+
+### List configured servers
+
+```console
+$ mmcp list [--config <path>]
+context7: npx -y @upstash/context7-mcp@latest
+
+$ mmcp list --json
+{
+  "context7": {
+    "command": "npx",
+    "args": ["-y", "@upstash/context7-mcp@latest"],
+    "env": {}
+  }
+}
+```
 
 ## Configuration
 
