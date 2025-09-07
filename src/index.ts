@@ -2,6 +2,7 @@ import { Argument, Command, Option } from "commander";
 import packageJson from "../package.json" with { type: "json" };
 import { addCommand } from "./commands/add";
 import { agentsAddCommand } from "./commands/agents-add";
+import { agentsListCommand } from "./commands/agents-list";
 import { agentsRemoveCommand } from "./commands/agents-remove";
 import { applyCommand } from "./commands/apply";
 import { listCommand } from "./commands/list";
@@ -113,6 +114,15 @@ agents
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .action((names: string[], options: { config: string }) => {
     agentsRemoveCommand({ names, configPath: options.config });
+  });
+
+agents
+  .command("list")
+  .description("List registered apply target agents")
+  .option("-c, --config <path>", "Path to config file", defaultConfigPath())
+  .option("--json", "Output agents as JSON", false)
+  .action((options: { config: string; json: boolean }) => {
+    agentsListCommand({ configPath: options.config, json: options.json });
   });
 
 program.parseAsync(process.argv).catch((err) => {
