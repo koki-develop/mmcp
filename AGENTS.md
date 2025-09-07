@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Layout
 - `src/index.ts`: CLI entry point using `commander`.
-- `src/commands/*`: Subcommands (`add`, `remove`, `apply`, `list`, `agents add/remove`).
+- `src/commands/*`: Subcommands (`add`, `remove`, `apply`, `list`, `agents add/remove/list`).
 - `src/lib/config.ts`: JSON config loader/saver (default path `~/.mmcp.json`).
 - `src/lib/agents/*`: Agent adapters (e.g., `claude-code` writes `~/.claude.json`).
 - `scripts/build.ts`: Bun build script producing `dist/`.
