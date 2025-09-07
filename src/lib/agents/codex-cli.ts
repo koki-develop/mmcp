@@ -11,10 +11,6 @@ export class CodexCliAgent implements AgentAdapter {
   applyConfig(config: Config): void {
     const content = this._loadConfig();
     const next = mergeConfig(content, config);
-    if (next === content) {
-      return;
-    }
-
     this._saveConfig(next);
   }
 
