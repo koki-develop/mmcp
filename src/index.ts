@@ -12,7 +12,12 @@ import { defaultConfigPath } from "./lib/config";
 
 const program = new Command();
 
-program.name("mmcp").version(packageJson.version);
+program
+  .name("mmcp")
+  .version(packageJson.version)
+  .description(
+    "Manage your MCP (Model Context Protocol) server definitions in one place and apply them to supported agents.",
+  );
 
 program
   .command("add")
