@@ -4,16 +4,16 @@ import path from "node:path";
 import type { Config } from "../config";
 import type { AgentAdapter } from "./adapter";
 
-export type ClaudeDesktopConfig = {
+export type CursorMcpConfig = {
   mcpServers?: {
-    [name: string]: unknown;
+    [name: string]: Record<string, unknown>;
   };
   // keep any other top-level keys
   [key: string]: unknown;
 };
 
-export class ClaudeDesktopAgent implements AgentAdapter {
-  readonly id = "claude-desktop" as const;
+export class CursorAgent implements AgentAdapter {
+  readonly id = "cursor" as const;
 
   applyConfig(config: Config): void {
     const agentConfig = this._loadConfig();
@@ -23,32 +23,10 @@ export class ClaudeDesktopAgent implements AgentAdapter {
 
   private _configPath(): string {
     const home = os.homedir();
-
-    // macOS
-    if (process.platform === "darwin") {
-      return path.join(
-        home,
-        "Library",
-        "Application Support",
-        "Claude",
-        "claude_desktop_config.json",
-      );
-    }
-
-    // Windows
-    if (process.platform === "win32") {
-      const appData = process.env.APPDATA;
-      if (!appData) {
-        throw new Error("Could not determine APPDATA directory.");
-      }
-      return path.join(appData, "Claude", "claude_desktop_config.json");
-    }
-
-    // Linux
-    return path.join(home, ".config", "Claude", "claude_desktop_config.json");
+    return path.join(home, ".cursor", "mcp.json");
   }
 
-  private _loadConfig(): ClaudeDesktopConfig {
+  private _loadConfig(): CursorMcpConfig {
     const pathname = this._configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
@@ -57,7 +35,7 @@ export class ClaudeDesktopAgent implements AgentAdapter {
     return JSON.parse(content);
   }
 
-  private _saveConfig(config: ClaudeDesktopConfig): void {
+  private _saveConfig(config: CursorMcpConfig): void {
     const pathname = this._configPath();
     const dir = path.dirname(pathname);
     if (!fs.existsSync(dir)) {
@@ -69,9 +47,9 @@ export class ClaudeDesktopAgent implements AgentAdapter {
 }
 
 export function mergeConfig(
-  agentConfig: ClaudeDesktopConfig,
+  agentConfig: CursorMcpConfig,
   config: Config,
-): ClaudeDesktopConfig {
+): CursorMcpConfig {
   const servers = Object.entries(config.mcpServers);
   if (servers.length === 0) {
     return agentConfig;
