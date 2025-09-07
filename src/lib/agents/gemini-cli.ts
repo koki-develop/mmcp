@@ -56,18 +56,20 @@ export function mergeConfig(
   agentConfig: GeminiSettings,
   config: Config,
 ): GeminiSettings {
+  const next = { ...agentConfig };
+
   const servers = Object.entries(config.mcpServers);
   if (servers.length === 0) {
-    return agentConfig;
+    return next;
   }
 
-  if (!agentConfig.mcpServers) {
-    agentConfig.mcpServers = {};
+  if (!next.mcpServers) {
+    next.mcpServers = {};
   }
 
   for (const [name, server] of Object.entries(config.mcpServers)) {
-    const existing = agentConfig.mcpServers[name] ?? {};
-    agentConfig.mcpServers[name] = {
+    const existing = next.mcpServers[name] ?? {};
+    next.mcpServers[name] = {
       ...existing,
       command: server.command,
       args: server.args,
@@ -75,5 +77,5 @@ export function mergeConfig(
     };
   }
 
-  return agentConfig;
+  return next;
 }
