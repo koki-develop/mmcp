@@ -58,7 +58,7 @@ describe("mergeConfig (claude-code)", () => {
       },
     ],
     [
-      "overwrites existing server and drops unknown keys under that server",
+      "overwrites existing server and keeps unknown keys under that server",
       {
         mcpServers: {
           context7: { command: "old", args: ["-x"], env: {}, other: "stay" },
@@ -72,7 +72,7 @@ describe("mergeConfig (claude-code)", () => {
       },
       {
         mcpServers: {
-          context7: { command: "npx", args: ["-y"], env: {} },
+          context7: { command: "npx", args: ["-y"], env: {}, other: "stay" },
         },
       },
     ],
