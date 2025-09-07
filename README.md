@@ -13,6 +13,7 @@ Manage your MCP (Model Context Protocol) server definitions in one place and app
 | [Claude Code](https://www.anthropic.com/claude-code) | `claude-code` | `~/.claude.json` |
 | [Claude Desktop](https://claude.ai/download) | `claude-desktop` | macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`<br>Windows: `%APPDATA%\Claude\claude_desktop_config.json`<br>Linux: `~/.config/Claude/claude_desktop_config.json` |
 | [Codex CLI](https://developers.openai.com/codex/cli) | `codex-cli` | `~/.codex/config.toml` |
+| [Gemini CLI](https://google-gemini.github.io/gemini-cli/) | `gemini-cli` | `~/.gemini/settings.json` |
 
 More agents may be added in the future.
 
@@ -54,6 +55,7 @@ $ mmcp agents add [--config <path>] <name...>
 # e.g.
 $ mmcp agents add claude-code
 $ mmcp agents add codex-cli
+$ mmcp agents add gemini-cli
 ```
 
 List registered agents:
@@ -62,6 +64,7 @@ List registered agents:
 $ mmcp agents list [--config <path>]
 claude-code
 codex-cli
+gemini-cli
 ```
 
 ### 3. Apply your mmcp config to the agents
@@ -83,7 +86,8 @@ Example:
 {
   "agents": [
     "claude-code",
-    "codex-cli"
+    "codex-cli",
+    "gemini-cli"
   ],
   "mcpServers": {
     "context7": {
