@@ -6,6 +6,15 @@
 
 Manage your MCP (Model Context Protocol) server definitions in one place and apply them to supported agents.
 
+## Supported Agents
+
+| Agent | id | Config Path |
+| --- | --- | --- |
+| [Claude Code](https://www.anthropic.com/claude-code) | `claude-code` | `~/.claude.json` |
+| [Codex CLI](https://developers.openai.com/codex/cli) | `codex-cli` | `~/.codex/config.toml` |
+
+More agents may be added in the future.
+
 ## Installation
 
 ```bash
@@ -95,13 +104,6 @@ Example:
   }
 }
 ```
-
-## Supported Agents
-
-- `claude-code`: writes MCP servers into `~/.claude.json`
-- `codex-cli`: writes MCP servers into `~/.codex/config.toml`
-
-More agents may be added in the future.
 
 ## License
 
