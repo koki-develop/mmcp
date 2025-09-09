@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/koki-develop/mmcp/compare/v0.3.1...v0.3.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* expose configPath method and improve apply command output ([6e43a18](https://github.com/koki-develop/mmcp/commit/6e43a18e72ee2a364ac6216ea64a00a6ecf1f5ad))
+* improve apply command output styling ([c6998e4](https://github.com/koki-develop/mmcp/commit/c6998e43599a3237e1958497dfb7328f8925c3da))
+
 ## [0.3.1](https://github.com/koki-develop/mmcp/compare/v0.3.0...v0.3.1) (2025-09-07)
 
 
