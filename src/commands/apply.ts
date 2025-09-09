@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import ora from "ora";
 import { getAgentById, supportedAgentIds } from "../lib/agents/registry";
 import { loadConfig } from "../lib/config";
@@ -32,6 +33,6 @@ export function applyCommand(params: ApplyCommandParams) {
   for (const adapter of adapters) {
     const spinner = ora().start(`Applying config: ${adapter.id}...`);
     adapter.applyConfig(config);
-    spinner.succeed(`${adapter.id} (${adapter.configPath()})`);
+    spinner.succeed(`${adapter.id} ${chalk.dim(adapter.configPath())}`);
   }
 }
