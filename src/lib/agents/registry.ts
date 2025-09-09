@@ -13,8 +13,12 @@ const agents: AgentAdapter[] = [
   new GeminiCliAgent(),
 ];
 
-export function getAgentById(id: string): AgentAdapter | undefined {
-  return agents.find((a) => a.id === id);
+export function getAgentById(id: string): AgentAdapter {
+  const agent = agents.find((a) => a.id === id);
+  if (!agent) {
+    throw new Error(`Unsupported agent: ${JSON.stringify(id)}.`);
+  }
+  return agent;
 }
 
 export function supportedAgentIds(): string[] {

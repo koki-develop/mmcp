@@ -28,14 +28,7 @@ export function applyCommand(params: ApplyCommandParams) {
     throw new Error(`Unsupported agents: ${unsupported.join(", ")}.`);
   }
 
-  const adapters = agentIds.map((id) => {
-    const adapter = getAgentById(id);
-    if (!adapter) {
-      throw new Error(`Unsupported agent: ${JSON.stringify(id)}.`);
-    }
-    return adapter;
-  });
-
+  const adapters = agentIds.map((id) => getAgentById(id));
   for (const adapter of adapters) {
     const spinner = ora().start(`Applying config: ${adapter.id}...`);
     adapter.applyConfig(config);
