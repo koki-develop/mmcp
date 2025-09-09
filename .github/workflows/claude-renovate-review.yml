@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   claude-renovate-review:
+    name: Claude Renovate Review
     if: github.event.pull_request.user.login == 'renovate[bot]'
     timeout-minutes: 30
     runs-on: ubuntu-latest

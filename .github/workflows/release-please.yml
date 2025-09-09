@@ -13,6 +13,7 @@ permissions: {}
 
 jobs:
   release-please:
+    name: Release Please
     timeout-minutes: 10
     permissions:
       contents: write
@@ -32,6 +33,7 @@ jobs:
           token: ${{ github.token }}
 
   publish:
+    name: Publish
     needs: release-please
     timeout-minutes: 10
     runs-on: ubuntu-latest
