@@ -32,6 +32,6 @@ export function applyCommand(params: ApplyCommandParams) {
   for (const adapter of adapters) {
     const spinner = ora().start(`Applying config: ${adapter.id}...`);
     adapter.applyConfig(config);
-    spinner.succeed(`Applied config: ${adapter.id}`);
+    spinner.succeed(`${adapter.id} (${adapter.configPath()})`);
   }
 }

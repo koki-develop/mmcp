@@ -21,13 +21,13 @@ export class CursorAgent implements AgentAdapter {
     this._saveConfig(next);
   }
 
-  private _configPath(): string {
+  configPath(): string {
     const home = os.homedir();
     return path.join(home, ".cursor", "mcp.json");
   }
 
   private _loadConfig(): CursorMcpConfig {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
     }
@@ -36,7 +36,7 @@ export class CursorAgent implements AgentAdapter {
   }
 
   private _saveConfig(config: CursorMcpConfig): void {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     const dir = path.dirname(pathname);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

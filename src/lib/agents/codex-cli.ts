@@ -14,29 +14,25 @@ export class CodexCliAgent implements AgentAdapter {
     this._saveConfig(next);
   }
 
-  private _loadConfig(): string {
+  configPath(): string {
     const home = os.homedir();
-    const dirPath = path.join(home, ".codex");
-    if (!fs.existsSync(dirPath)) {
-      return "";
-    }
+    return path.join(home, ".codex", "config.toml");
+  }
 
-    const filePath = path.join(dirPath, "config.toml");
+  private _loadConfig(): string {
+    const filePath = this.configPath();
     if (!fs.existsSync(filePath)) {
       return "";
     }
-
     return fs.readFileSync(filePath, "utf-8");
   }
 
   private _saveConfig(config: string): void {
-    const home = os.homedir();
-    const dirPath = path.join(home, ".codex");
+    const filePath = this.configPath();
+    const dirPath = path.dirname(filePath);
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
     }
-
-    const filePath = path.join(dirPath, "config.toml");
     fs.writeFileSync(filePath, config, "utf-8");
   }
 }

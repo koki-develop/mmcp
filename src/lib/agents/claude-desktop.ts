@@ -21,7 +21,7 @@ export class ClaudeDesktopAgent implements AgentAdapter {
     this._saveConfig(next);
   }
 
-  private _configPath(): string {
+  configPath(): string {
     const home = os.homedir();
 
     // macOS
@@ -49,7 +49,7 @@ export class ClaudeDesktopAgent implements AgentAdapter {
   }
 
   private _loadConfig(): ClaudeDesktopConfig {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
     }
@@ -58,7 +58,7 @@ export class ClaudeDesktopAgent implements AgentAdapter {
   }
 
   private _saveConfig(config: ClaudeDesktopConfig): void {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     const dir = path.dirname(pathname);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

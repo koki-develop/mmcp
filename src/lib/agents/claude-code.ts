@@ -20,13 +20,13 @@ export class ClaudeCodeAgent implements AgentAdapter {
     this._saveConfig(next);
   }
 
-  private _configPath(): string {
+  configPath(): string {
     const home = os.homedir();
     return path.join(home, ".claude.json");
   }
 
   private _loadConfig(): ClaudeCodeConfig {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
     }
@@ -35,7 +35,7 @@ export class ClaudeCodeAgent implements AgentAdapter {
   }
 
   private _saveConfig(config: ClaudeCodeConfig): void {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     const content = `${JSON.stringify(config, null, 2)}\n`;
     fs.writeFileSync(pathname, content, "utf-8");
   }

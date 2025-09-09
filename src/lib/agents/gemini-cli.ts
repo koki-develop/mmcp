@@ -21,13 +21,13 @@ export class GeminiCliAgent implements AgentAdapter {
     this._saveConfig(next);
   }
 
-  private _configPath(): string {
+  configPath(): string {
     const home = os.homedir();
     return path.join(home, ".gemini", "settings.json");
   }
 
   private _loadConfig(): GeminiSettings {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
     }
@@ -37,7 +37,7 @@ export class GeminiCliAgent implements AgentAdapter {
   }
 
   private _saveConfig(config: GeminiSettings): void {
-    const pathname = this._configPath();
+    const pathname = this.configPath();
     const dir = path.dirname(pathname);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
