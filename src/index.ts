@@ -62,6 +62,7 @@ program
 
 program
   .command("remove")
+  .alias("rm")
   .description("Remove a mcp server")
   .argument("<name>", "Name of the server")
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
@@ -87,6 +88,7 @@ program
 
 program
   .command("list")
+  .alias("ls")
   .description("List configured mcp servers")
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .option("--json", "Output mcpServers as JSON", false)
@@ -112,6 +114,7 @@ agents
 
 agents
   .command("remove")
+  .alias("rm")
   .description("Remove apply target agents")
   .addArgument(
     new Argument("<name...>", "Agent names").choices(supportedAgentIds()),
@@ -123,6 +126,7 @@ agents
 
 agents
   .command("list")
+  .alias("ls")
   .description("List registered apply target agents")
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .option("--json", "Output agents as JSON", false)
