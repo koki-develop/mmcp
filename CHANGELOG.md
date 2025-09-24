@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/koki-develop/mmcp/compare/v0.3.2...v0.4.0) (2025-09-22)
+
+
+### Features
+
+* Add command aliases ([#26](https://github.com/koki-develop/mmcp/issues/26)) ([4869093](https://github.com/koki-develop/mmcp/commit/4869093ccc2446526d477387ea016d665d6fdbbc))
+
+
+### Bug Fixes
+
+* **deps:** update dependency commander to v14.0.1 ([#24](https://github.com/koki-develop/mmcp/issues/24)) ([8ee1f09](https://github.com/koki-develop/mmcp/commit/8ee1f09ad6f634a0d77d74e73fde596174ac8214))
+* **deps:** update dependency zod to v4.1.9 ([#23](https://github.com/koki-develop/mmcp/issues/23)) ([f5f6697](https://github.com/koki-develop/mmcp/commit/f5f6697ce6cec0b2a999989b3f5e11b5efbd7a14))
+
 ## [0.3.2](https://github.com/koki-develop/mmcp/compare/v0.3.1...v0.3.2) (2025-09-09)
 
 
