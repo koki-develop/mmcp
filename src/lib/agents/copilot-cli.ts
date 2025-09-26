@@ -84,18 +84,17 @@ export function mergeConfig(
   // Ensure all existing servers have required fields
   for (const [_name, server] of Object.entries(agentConfig.mcpServers)) {
     if (typeof server === "object" && server !== null) {
-      const serverObj = server as Record<string, unknown>;
-      if (!serverObj.type) {
-        serverObj.type = "local";
+      if (!("type" in server)) {
+        (server as any).type = "local";
       }
-      if (!serverObj.tools) {
-        serverObj.tools = ["*"];
+      if (!("tools" in server)) {
+        (server as any).tools = ["*"];
       }
-      if (!serverObj.args) {
-        serverObj.args = [];
+      if (!("args" in server)) {
+        (server as any).args = [];
       }
-      if (!serverObj.env) {
-        serverObj.env = {};
+      if (!("env" in server)) {
+        (server as any).env = {};
       }
     }
   }
