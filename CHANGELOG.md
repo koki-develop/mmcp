@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/koki-develop/mmcp/compare/v0.4.0...v0.5.0) (2025-10-01)
+
+
+### Features
+
+* add github-copilot-cli agent support (early support) ([#31](https://github.com/koki-develop/mmcp/issues/31)) ([89b859c](https://github.com/koki-develop/mmcp/commit/89b859cb67f9bb781b772565bdf5f9a2f398d3d7))
+
 ## [0.4.0](https://github.com/koki-develop/mmcp/compare/v0.3.2...v0.4.0) (2025-09-22)
 
 
