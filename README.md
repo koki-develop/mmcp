@@ -15,6 +15,7 @@ Manage your MCP (Model Context Protocol) server definitions in one place and app
 | [Codex CLI](https://developers.openai.com/codex/cli) | `codex-cli` | `~/.codex/config.toml` |
 | [Cursor](https://docs.cursor.com/) | `cursor` | `~/.cursor/mcp.json` |
 | [Gemini CLI](https://google-gemini.github.io/gemini-cli/) | `gemini-cli` | `~/.gemini/settings.json` |
+| [GitHub Copilot CLI](https://github.com/github/copilot-cli) | `github-copilot-cli` | `~/.copilot/mcp-config.json` |
 
 More agents may be added in the future.
 
@@ -59,6 +60,7 @@ $ mmcp agents add claude-desktop
 $ mmcp agents add codex-cli
 $ mmcp agents add cursor
 $ mmcp agents add gemini-cli
+$ mmcp agents add github-copilot-cli
 ```
 
 List registered agents:
@@ -70,6 +72,7 @@ claude-desktop
 codex-cli
 cursor
 gemini-cli
+github-copilot-cli
 ```
 
 ### 3. Apply your mmcp config to the agents
@@ -94,7 +97,8 @@ Example:
     "claude-desktop",
     "codex-cli",
     "cursor",
-    "gemini-cli"
+    "gemini-cli",
+    "github-copilot-cli"
   ],
   "mcpServers": {
     "context7": {

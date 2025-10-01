@@ -4,6 +4,7 @@ import { ClaudeDesktopAgent } from "./claude-desktop";
 import { CodexCliAgent } from "./codex-cli";
 import { CursorAgent } from "./cursor";
 import { GeminiCliAgent } from "./gemini-cli";
+import { GitHubCopilotCliAgent } from "./github-copilot-cli";
 
 const agents: AgentAdapter[] = [
   new ClaudeCodeAgent(),
@@ -11,6 +12,7 @@ const agents: AgentAdapter[] = [
   new CodexCliAgent(),
   new CursorAgent(),
   new GeminiCliAgent(),
+  new GitHubCopilotCliAgent(),
 ];
 
 export function getAgentById(id: string): AgentAdapter {
