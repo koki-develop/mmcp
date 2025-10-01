@@ -13,13 +13,11 @@ Manage your MCP (Model Context Protocol) server definitions in one place and app
 | [Claude Code](https://www.anthropic.com/claude-code) | `claude-code` | `~/.claude.json` |
 | [Claude Desktop](https://claude.ai/download) | `claude-desktop` | macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`<br>Windows: `%APPDATA%\Claude\claude_desktop_config.json`<br>Linux: `~/.config/Claude/claude_desktop_config.json` |
 | [Codex CLI](https://developers.openai.com/codex/cli) | `codex-cli` | `~/.codex/config.toml` |
-| [Copilot CLI](https://github.com/github/gh-copilot) | `copilot-cli` | `~/.copilot/mcp-config.json` (⚠️ Early support) |
+| [Copilot CLI](https://github.com/github/gh-copilot) | `copilot-cli` | `~/.copilot/mcp-config.json` |
 | [Cursor](https://docs.cursor.com/) | `cursor` | `~/.cursor/mcp.json` |
 | [Gemini CLI](https://google-gemini.github.io/gemini-cli/) | `gemini-cli` | `~/.gemini/settings.json` |
 
 More agents may be added in the future.
-
-⚠️ **Note**: Agents marked with "Early support" are in initial development stage and may have limited functionality or undergo breaking changes.
 
 ## Installation
 
