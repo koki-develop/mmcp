@@ -1,13 +1,13 @@
 import { describe, expect, test } from "bun:test";
 import type { Config } from "../config";
-import { type CopilotCliConfig, mergeConfig } from "./copilot-cli";
+import { type GitHubCopilotCliConfig, mergeConfig } from "./github-copilot-cli";
 
 describe("mergeConfig", () => {
   type Case = [
     title: string,
-    agentConfig: CopilotCliConfig,
+    agentConfig: GitHubCopilotCliConfig,
     config: Config,
-    expected: CopilotCliConfig,
+    expected: GitHubCopilotCliConfig,
   ];
 
   const cases: Case[] = [

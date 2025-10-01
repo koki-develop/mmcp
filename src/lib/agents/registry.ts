@@ -2,17 +2,17 @@ import type { AgentAdapter } from "./adapter";
 import { ClaudeCodeAgent } from "./claude-code";
 import { ClaudeDesktopAgent } from "./claude-desktop";
 import { CodexCliAgent } from "./codex-cli";
-import { CopilotCliAgent } from "./copilot-cli";
 import { CursorAgent } from "./cursor";
 import { GeminiCliAgent } from "./gemini-cli";
+import { GitHubCopilotCliAgent } from "./github-copilot-cli";
 
 const agents: AgentAdapter[] = [
   new ClaudeCodeAgent(),
   new ClaudeDesktopAgent(),
   new CodexCliAgent(),
-  new CopilotCliAgent(),
   new CursorAgent(),
   new GeminiCliAgent(),
+  new GitHubCopilotCliAgent(),
 ];
 
 export function getAgentById(id: string): AgentAdapter {

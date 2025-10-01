@@ -4,15 +4,15 @@ import path from "node:path";
 import type { Config } from "../config";
 import type { AgentAdapter } from "./adapter";
 
-export type CopilotCliConfig = {
+export type GitHubCopilotCliConfig = {
   mcpServers?: {
     [name: string]: unknown;
   };
   [key: string]: unknown;
 };
 
-export class CopilotCliAgent implements AgentAdapter {
-  readonly id = "copilot-cli" as const;
+export class GitHubCopilotCliAgent implements AgentAdapter {
+  readonly id = "github-copilot-cli" as const;
 
   applyConfig(config: Config): void {
     const agentConfig = this._loadConfig();
@@ -25,7 +25,7 @@ export class CopilotCliAgent implements AgentAdapter {
     return path.join(home, ".copilot", "mcp-config.json");
   }
 
-  private _loadConfig(): CopilotCliConfig {
+  private _loadConfig(): GitHubCopilotCliConfig {
     const pathname = this.configPath();
     if (!fs.existsSync(pathname)) {
       return { mcpServers: {} };
@@ -34,7 +34,7 @@ export class CopilotCliAgent implements AgentAdapter {
     return JSON.parse(content);
   }
 
-  private _saveConfig(config: CopilotCliConfig): void {
+  private _saveConfig(config: GitHubCopilotCliConfig): void {
     const pathname = this.configPath();
     const dir = path.dirname(pathname);
     if (!fs.existsSync(dir)) {
@@ -46,9 +46,9 @@ export class CopilotCliAgent implements AgentAdapter {
 }
 
 export function mergeConfig(
-  agentConfig: CopilotCliConfig,
+  agentConfig: GitHubCopilotCliConfig,
   config: Config,
-): CopilotCliConfig {
+): GitHubCopilotCliConfig {
   const servers = Object.entries(config.mcpServers);
   if (servers.length === 0) {
     return agentConfig;
