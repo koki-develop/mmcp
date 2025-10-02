@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/koki-develop/mmcp/compare/v0.5.0...v0.5.1) (2025-10-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ora to v9 ([#30](https://github.com/koki-develop/mmcp/issues/30)) ([f0dfa17](https://github.com/koki-develop/mmcp/commit/f0dfa177e76a81bd84cbaaeef77ff70b9c4b2aba))
+
 ## [0.5.0](https://github.com/koki-develop/mmcp/compare/v0.4.0...v0.5.0) (2025-10-01)
 
 
