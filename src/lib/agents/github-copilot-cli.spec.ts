@@ -26,6 +26,7 @@ describe("mergeConfig", () => {
         otherProp: "value",
       },
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           server2: { command: "cmd2", env: {} },
@@ -53,13 +54,14 @@ describe("mergeConfig", () => {
     [
       "should handle empty servers",
       { otherProp: "value" },
-      { agents: [], mcpServers: {} },
+      { mode: "merge", agents: [], mcpServers: {} },
       { otherProp: "value" },
     ],
     [
       "should create mcpServers property if it doesn't exist",
       {},
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           server1: { command: "cmd1", env: {} },
@@ -89,6 +91,7 @@ describe("mergeConfig", () => {
         },
       },
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           server1: { args: ["--new"], command: "new-cmd", env: {} },
@@ -102,6 +105,79 @@ describe("mergeConfig", () => {
             tools: ["*"],
             args: ["--new"],
             command: "new-cmd",
+            env: {},
+          },
+        },
+      },
+    ],
+    [
+      "should replace all servers in replace mode",
+      {
+        mcpServers: {
+          server1: {
+            command: "cmd1",
+            type: "local",
+            tools: ["*"],
+            args: [],
+            env: {},
+          },
+          server2: {
+            command: "cmd2",
+            type: "local",
+            tools: ["*"],
+            args: [],
+            env: {},
+          },
+        },
+        otherProp: "value",
+      },
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          server3: { command: "cmd3", env: {} },
+        },
+      },
+      {
+        mcpServers: {
+          server3: {
+            type: "local",
+            tools: ["*"],
+            command: "cmd3",
+            env: {},
+          },
+        },
+        otherProp: "value",
+      },
+    ],
+    [
+      "should preserve other top-level keys in replace mode",
+      {
+        theme: "dark",
+        mcpServers: {
+          server1: {
+            command: "cmd1",
+            type: "local",
+            tools: ["*"],
+            args: [],
+            env: {},
+          },
+        },
+      },
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          server2: { command: "cmd2", env: {} },
+        },
+      },
+      {
+        theme: "dark",
+        mcpServers: {
+          server2: {
+            type: "local",
+            tools: ["*"],
+            command: "cmd2",
             env: {},
           },
         },
