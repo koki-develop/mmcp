@@ -41,8 +41,9 @@ The core architecture uses an **adapter pattern** for supporting multiple agents
 ### Config Management
 
 - **`src/lib/config.ts`**: Manages `~/.mmcp.json` with Zod schema validation
-- Config schema: `{ agents: string[], mcpServers: Record<string, MCPServer> }`
+- Config schema: `{ mode: "merge"|"replace", agents: string[], mcpServers: Record<string, MCPServer> }` (mode defaults to `merge`)
 - `MCPServer` schema allows `url`, `command`, `args`, and `env` (all optional/partial)
+- Apply mode `merge` keeps existing agent entries unless overridden by mmcp, while `replace` rewrites each agent's MCP servers solely from mmcp.
 
 ### Command Structure
 
@@ -50,7 +51,7 @@ The core architecture uses an **adapter pattern** for supporting multiple agents
 - **`src/commands/*.ts`**: Individual command implementations
   - `add.ts`: Add MCP server to mmcp config
   - `remove.ts`: Remove MCP server from mmcp config
-  - `apply.ts`: Apply mmcp config to registered agents
+  - `apply.ts`: Apply mmcp config to registered agents (`--mode merge|replace` overrides config value)
   - `list.ts`: List configured MCP servers
   - `agents-{add,remove,list}.ts`: Manage target agents list
 
