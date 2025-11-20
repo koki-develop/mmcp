@@ -58,15 +58,28 @@ export function mergeConfig(
     agentConfig.mcpServers = {};
   }
 
-  for (const [name, server] of servers) {
-    const existing = agentConfig.mcpServers[name] ?? {};
-    agentConfig.mcpServers[name] = {
-      type: "local",
-      tools: ["*"],
-      ...existing,
-      ...server,
-    };
+  if (config.mode === "replace") {
+    agentConfig.mcpServers = Object.entries(config.mcpServers).reduce<{
+      [name: string]: unknown;
+    }>((acc, [name, server]) => {
+      acc[name] = { type: "local", tools: ["*"], ...server };
+      return acc;
+    }, {});
+    return agentConfig;
   }
 
-  return agentConfig;
+  if (config.mode === "merge") {
+    for (const [name, server] of servers) {
+      const existing = agentConfig.mcpServers[name] ?? {};
+      agentConfig.mcpServers[name] = {
+        type: "local",
+        tools: ["*"],
+        ...existing,
+        ...server,
+      };
+    }
+    return agentConfig;
+  }
+
+  throw new Error(`Unknown config mode: ${config.mode}`);
 }

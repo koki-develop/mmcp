@@ -15,6 +15,7 @@ export const mcpServerSchema = z
 export type MCPServer = z.infer<typeof mcpServerSchema>;
 
 export const configSchema = z.object({
+  mode: z.enum(["merge", "replace"]).default("merge"),
   agents: z.array(z.string().min(1)).default([]),
   mcpServers: z.record(z.string().min(1), mcpServerSchema).default({}),
 });
@@ -35,7 +36,7 @@ export function loadConfig(params: LoadConfigParams): Config {
     if (params.path !== defaultConfigPath()) {
       throw new Error(`Config file not found: ${params.path}`);
     }
-    return { mcpServers: {}, agents: [] };
+    return { mode: "merge", mcpServers: {}, agents: [] };
   }
 
   const content = fs.readFileSync(params.path, "utf-8");

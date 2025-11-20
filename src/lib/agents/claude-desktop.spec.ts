@@ -16,6 +16,7 @@ describe("mergeConfig (claude-desktop)", () => {
       "inserts new server into empty agent config",
       {},
       {
+        mode: "merge",
         agents: ["claude-desktop"],
         mcpServers: {
           context7: {
@@ -44,6 +45,7 @@ describe("mergeConfig (claude-desktop)", () => {
         },
       },
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           ctx: { command: "npx", args: [], env: {} },
@@ -65,6 +67,7 @@ describe("mergeConfig (claude-desktop)", () => {
         },
       },
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           context7: { command: "npx", args: ["-y"], env: {} },
@@ -80,6 +83,7 @@ describe("mergeConfig (claude-desktop)", () => {
       "supports names with dot and space",
       { mcpServers: {} },
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           "name.with dot": { command: "npx", args: [], env: { K: "V" } },
@@ -94,8 +98,51 @@ describe("mergeConfig (claude-desktop)", () => {
     [
       "empty mmcp servers results in no change",
       { mcpServers: { keep: { command: "x", args: [], env: {} } } },
-      { agents: [], mcpServers: {} },
+      { mode: "merge", agents: [], mcpServers: {} },
       { mcpServers: { keep: { command: "x", args: [], env: {} } } },
+    ],
+    [
+      "replaces all servers in replace mode",
+      {
+        mcpServers: {
+          foo: { command: "node", args: ["foo.js"], env: { A: "1" } },
+          bar: { command: "node", args: ["bar.js"], env: {} },
+        },
+      },
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          context7: { command: "npx", args: ["-y"], env: {} },
+        },
+      },
+      {
+        mcpServers: {
+          context7: { command: "npx", args: ["-y"], env: {} },
+        },
+      },
+    ],
+    [
+      "preserves other top-level keys in replace mode",
+      {
+        theme: "dark",
+        mcpServers: {
+          foo: { command: "node", args: ["foo.js"], env: { A: "1" } },
+        },
+      },
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          context7: { command: "npx", args: ["-y"], env: {} },
+        },
+      },
+      {
+        theme: "dark",
+        mcpServers: {
+          context7: { command: "npx", args: ["-y"], env: {} },
+        },
+      },
     ],
   ];
 

@@ -6,10 +6,14 @@ import { loadConfig } from "../lib/config";
 export type ApplyCommandParams = {
   agents: string[];
   configPath: string; // --config (mmcp)
+  mode?: "merge" | "replace"; // --mode
 };
 
 export function applyCommand(params: ApplyCommandParams) {
   const config = loadConfig({ path: params.configPath });
+  if (params.mode) {
+    config.mode = params.mode;
+  }
 
   // Determine target agents
   const agentIds = (() => {
