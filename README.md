@@ -78,8 +78,10 @@ github-copilot-cli
 ### 3. Apply your mmcp config to the agents
 
 ```console
-$ mmcp apply
+$ mmcp apply [--mode merge|replace]
 ```
+
+See [Apply modes](#apply-modes) for what each mode does.
 
 That’s it. Your MCP servers from `~/.mmcp.json` will be written into the agent’s config (e.g. `~/.claude.json` for Claude Code).
 
@@ -92,6 +94,7 @@ Example:
 
 ```json
 {
+  "mode": "merge",
   "agents": [
     "claude-code",
     "claude-desktop",
@@ -119,6 +122,104 @@ Example:
     }
   }
 }
+```
+
+## Apply modes
+
+`mode` controls how agent configs are updated when you run `mmcp apply`.
+
+### `merge` (default)
+
+Existing agent entries stay unless mmcp overrides the same name.
+
+**Existing agent config**
+
+```json
+{
+  "mcpServers": {
+    "other": {
+      "command": "custom"
+    }
+  }
+}
+```
+
+**mmcp.json**
+
+```json
+{
+  "mode": "merge",
+  "agents": [...],
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+**After applying**
+
+```diff
+ {
+   "mcpServers": {
+     "other": {
+       "command": "custom"
+     },
++    "context7": {
++      "command": "npx",
++      "args": ["-y", "@upstash/context7-mcp@latest"]
++    }
+   }
+ }
+```
+
+### `replace`
+
+All agent-side entries are removed and re-created from mmcp.
+
+**Existing agent config**
+
+```json
+{
+  "mcpServers": {
+    "other": {
+      "command": "custom"
+    }
+  }
+}
+```
+
+**mmcp.json**
+
+```json
+{
+  "mode": "replace",
+  "agents": [...],
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+**After applying**
+
+```diff
+ {
+   "mcpServers": {
+-    "other": {
+-      "command": "custom"
+-    }
++    "context7": {
++      "command": "npx",
++      "args": ["-y", "@upstash/context7-mcp@latest"]
++    }
+   }
+ }
 ```
 
 ## License
