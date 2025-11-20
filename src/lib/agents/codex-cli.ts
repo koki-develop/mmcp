@@ -71,7 +71,11 @@ function stripMcpServerSections(content: string): string {
   for (const line of lines) {
     const match = line.match(sectionRegex);
     if (match) {
-      const header = match[1].trim();
+      const headerMatch = match[1];
+      if (!headerMatch) {
+        continue;
+      }
+      const header = headerMatch.trim();
       if (header === "mcp_servers" || header.startsWith("mcp_servers.")) {
         skipping = true;
         continue;
