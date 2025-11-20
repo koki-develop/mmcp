@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/koki-develop/mmcp/compare/v0.5.0...v0.6.0) (2025-11-20)
+
+
+### Features
+
+* add replace mode support ([#37](https://github.com/koki-develop/mmcp/issues/37)) ([d8fe3ed](https://github.com/koki-develop/mmcp/commit/d8fe3edc3b0a84a109c81eb500784029ab401d58))
+
+
+### Bug Fixes
+
+* **deps:** update dependency ora to v9 ([#30](https://github.com/koki-develop/mmcp/issues/30)) ([f0dfa17](https://github.com/koki-develop/mmcp/commit/f0dfa177e76a81bd84cbaaeef77ff70b9c4b2aba))
+
 ## [0.5.0](https://github.com/koki-develop/mmcp/compare/v0.4.0...v0.5.0) (2025-10-01)
 
 
