@@ -124,11 +124,11 @@ Example:
 }
 ```
 
-## Apply modes
+### Apply modes
 
 `mode` controls how agent configs are updated when you run `mmcp apply`.
 
-### `merge` (default)
+#### `merge` (default)
 
 Existing agent entries stay unless mmcp overrides the same name.
 
@@ -175,7 +175,7 @@ Existing agent entries stay unless mmcp overrides the same name.
  }
 ```
 
-### `replace`
+#### `replace`
 
 All agent-side entries are removed and re-created from mmcp.
 
