@@ -81,10 +81,25 @@ program
       supportedAgentIds(),
     ),
   )
+  .addOption(
+    new Option("--mode <mode>", "Apply mode")
+      .choices(["merge", "replace"])
+      .default("merge"),
+  )
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
-  .action((options: { agents?: string[]; config: string }) => {
-    applyCommand({ agents: options.agents ?? [], configPath: options.config });
-  });
+  .action(
+    (options: {
+      agents?: string[];
+      config: string;
+      mode: "merge" | "replace";
+    }) => {
+      applyCommand({
+        agents: options.agents ?? [],
+        configPath: options.config,
+        mode: options.mode,
+      });
+    },
+  );
 
 program
   .command("list")
