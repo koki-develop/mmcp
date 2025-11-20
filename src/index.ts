@@ -82,16 +82,14 @@ program
     ),
   )
   .addOption(
-    new Option("--mode <mode>", "Apply mode")
-      .choices(["merge", "replace"])
-      .default("merge"),
+    new Option("--mode <mode>", "Apply mode").choices(["merge", "replace"]),
   )
   .option("-c, --config <path>", "Path to config file", defaultConfigPath())
   .action(
     (options: {
       agents?: string[];
       config: string;
-      mode: "merge" | "replace";
+      mode?: "merge" | "replace";
     }) => {
       applyCommand({
         agents: options.agents ?? [],

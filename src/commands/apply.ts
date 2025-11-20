@@ -6,7 +6,7 @@ import { loadConfig } from "../lib/config";
 export type ApplyCommandParams = {
   agents: string[];
   configPath: string; // --config (mmcp)
-  mode: "merge" | "replace"; // --mode
+  mode?: "merge" | "replace"; // --mode
 };
 
 export function applyCommand(params: ApplyCommandParams) {
