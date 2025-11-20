@@ -11,6 +11,7 @@ describe("mergeConfig", () => {
       "insert into empty file (with env)",
       "",
       {
+        mode: "merge",
         agents: ["codex-cli"],
         mcpServers: {
           context7: {
@@ -34,6 +35,7 @@ describe("mergeConfig", () => {
       "preserves other sections and appends new server",
       ["# header", "[other.section]", "x = 1", ""].join("\n"),
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           ctx: { command: "npx", args: [], env: {} },
@@ -60,6 +62,7 @@ describe("mergeConfig", () => {
         "",
       ].join("\n"),
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           context7: { command: "npx", args: ["-y"], env: {} },
@@ -77,6 +80,7 @@ describe("mergeConfig", () => {
       "quoted section names are handled",
       ['[mcp_servers."name.with dot"]', 'command = "old"', ""].join("\n"),
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           "name.with dot": { command: "new", args: [], env: {} },
@@ -92,8 +96,86 @@ describe("mergeConfig", () => {
     [
       "empty servers results in no change",
       "# nothing\n",
-      { agents: [], mcpServers: {} },
+      { mode: "merge", agents: [], mcpServers: {} },
       "# nothing\n",
+    ],
+    [
+      "replaces all mcp_servers in replace mode",
+      [
+        "[mcp_servers.old1]",
+        'command = "old1"',
+        "",
+        "[mcp_servers.old2]",
+        'command = "old2"',
+        "",
+      ].join("\n"),
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          new: { command: "new", args: [], env: {} },
+        },
+      },
+      ["[mcp_servers.new]", 'command = "new"', "args = []", ""].join("\n"),
+    ],
+    [
+      "preserves other sections in replace mode",
+      [
+        "# header",
+        "[other.section]",
+        "x = 1",
+        "",
+        "[mcp_servers.old]",
+        'command = "old"',
+        "",
+      ].join("\n"),
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          new: { command: "new", args: [], env: {} },
+        },
+      },
+      [
+        "# header",
+        "[other.section]",
+        "x = 1",
+        "",
+        "[mcp_servers.new]",
+        'command = "new"',
+        "args = []",
+        "",
+      ].join("\n"),
+    ],
+    [
+      "replace mode strips headers with inline comments",
+      [
+        "[mcp_servers.old1] # keep until next release",
+        'command = "old1"',
+        "",
+        "[mcp_servers.old2]   ; TODO remove",
+        'command = "old2"',
+        "",
+        "[other.section] # untouched",
+        "x = 1",
+        "",
+      ].join("\n"),
+      {
+        mode: "replace",
+        agents: [],
+        mcpServers: {
+          new: { command: "new", args: [], env: {} },
+        },
+      },
+      [
+        "[other.section] # untouched",
+        "x = 1",
+        "",
+        "[mcp_servers.new]",
+        'command = "new"',
+        "args = []",
+        "",
+      ].join("\n"),
     ],
   ];
 
@@ -111,6 +193,7 @@ describe("buildPatches", () => {
       "inserts unknown scalar keys and arrays",
       "",
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           svc: {
@@ -134,6 +217,7 @@ describe("buildPatches", () => {
       "adds nested object tables",
       "",
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           svc: {
@@ -160,6 +244,7 @@ describe("buildPatches", () => {
         "\n",
       ),
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           ctx: { command: "new", other: undefined },
@@ -178,6 +263,7 @@ describe("buildPatches", () => {
         "",
       ].join("\n"),
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           svc: { args: [], env: { A: "x", B: "2" } },
@@ -198,6 +284,7 @@ describe("buildPatches", () => {
       "quoted section names are handled",
       "",
       {
+        mode: "merge",
         agents: [],
         mcpServers: {
           "name.with dot": { url: "http://localhost:3333" },
@@ -213,6 +300,7 @@ describe("buildPatches", () => {
       "url only server",
       "# nothing\n",
       {
+        mode: "merge",
         agents: [],
         mcpServers: { only: { url: "http://127.0.0.1:8080" } },
       },

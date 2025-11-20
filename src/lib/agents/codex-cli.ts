@@ -39,12 +39,58 @@ export class CodexCliAgent implements AgentAdapter {
 
 export function mergeConfig(content: string, config: Config): string {
   const servers = Object.entries(config.mcpServers);
-  if (servers.length === 0) {
-    return content;
+
+  if (config.mode === "replace") {
+    const stripped = stripMcpServerSections(content);
+    if (servers.length === 0) {
+      return stripped;
+    }
+    const patches = buildPatches(config);
+    return updateTomlValues(stripped, patches);
   }
 
-  const patches = buildPatches(config);
-  return updateTomlValues(content, patches);
+  if (config.mode === "merge") {
+    if (servers.length === 0) {
+      return content;
+    }
+    const patches = buildPatches(config);
+    return updateTomlValues(content, patches);
+  }
+
+  throw new Error(`Unknown config mode: ${config.mode}`);
+}
+
+function stripMcpServerSections(content: string): string {
+  const lines = content.split("\n");
+  const kept: string[] = [];
+  let skipping = false;
+
+  // Allow inline comments (`#` or `;`) after section headers.
+  const sectionRegex = /^\s*\[([^\]]+)]\s*(?:[#;].*)?$/;
+
+  for (const line of lines) {
+    const match = line.match(sectionRegex);
+    if (match) {
+      const header = match[1].trim();
+      if (header === "mcp_servers" || header.startsWith("mcp_servers.")) {
+        skipping = true;
+        continue;
+      }
+      skipping = false;
+      kept.push(line);
+      continue;
+    }
+
+    if (skipping) {
+      continue;
+    }
+
+    kept.push(line);
+  }
+
+  // Preserve original trailing newline behavior by trimming possible empty line
+  // artifacts introduced during stripping.
+  return kept.join("\n").replace(/\n+$/, (match) => "\n".repeat(match.length));
 }
 
 type PatchValue =
