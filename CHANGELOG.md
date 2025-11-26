@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.1](https://github.com/koki-develop/mmcp/compare/v0.6.0...v0.6.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency commander to v14.0.2 ([#42](https://github.com/koki-develop/mmcp/issues/42)) ([2b8c242](https://github.com/koki-develop/mmcp/commit/2b8c24220978e55c340939bfbf05c2e1ceb51b66))
+* **deps:** update dependency zod to v4.1.12 ([#29](https://github.com/koki-develop/mmcp/issues/29)) ([29a78ef](https://github.com/koki-develop/mmcp/commit/29a78ef69c96c779319e95c66b6c8ded4ba1b7fd))
+
 ## [0.6.0](https://github.com/koki-develop/mmcp/compare/v0.5.0...v0.6.0) (2025-11-20)
 
 
