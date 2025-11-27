@@ -2,7 +2,7 @@
   "name": "mmcp",
   "module": "src/index.ts",
   "type": "module",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": "koki-develop <kou.pg.0131@gmail.com>",
   "homepage": "https://github.com/koki-develop/mmcp",
   "repository": {
