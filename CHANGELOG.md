@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/koki-develop/mmcp/compare/v0.6.1...v0.6.2) (2025-11-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.1.13 ([#45](https://github.com/koki-develop/mmcp/issues/45)) ([7ceb49d](https://github.com/koki-develop/mmcp/commit/7ceb49dc23e85b185f89bfa8e0aca344ef6487c6))
+
 ## [0.6.1](https://github.com/koki-develop/mmcp/compare/v0.6.0...v0.6.1) (2025-11-26)
 
 
